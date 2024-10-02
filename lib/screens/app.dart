@@ -32,6 +32,7 @@ class App extends StatelessWidget {
             statusBarBrightness: Brightness.dark,
             statusBarIconBrightness: Brightness.dark,
           ),
+          scrolledUnderElevation: 0.0,
         ),
         primaryColor: Colors.deepPurple,
         scaffoldBackgroundColor: Colors.white,

@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qtim_problem/screens/basket/view/basket_page.dart';
 import 'package:qtim_problem/screens/catalog/view/catalog_page.dart';
+import 'package:qtim_problem/screens/detail_catalog/view/detail_catalog_page.dart';
+import 'package:qtim_problem/screens/product/view/product_page.dart';
 import 'package:qtim_problem/screens/profile/view/profile_page.dart';
 
 import 'router.dart';
@@ -22,6 +24,12 @@ final profileNavigatorKey = GlobalKey<NavigatorState>();
         TypedGoRoute<CatalogRoute>(
           path: '/catalog',
           name: CatalogPage.routeName,
+          routes: [
+            TypedGoRoute<DetailCatalogRoute>(
+              path: 'detail-catalog',
+              name: DetailCatalogPage.routeName,
+            ),
+          ],
         ),
       ],
     ),
@@ -50,10 +58,10 @@ class MenuShellRoute extends StatefulShellRouteData {
 
   @override
   Widget builder(
-      BuildContext context,
-      GoRouterState state,
-      StatefulNavigationShell navigationShell,
-      ) {
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
     return ScaffoldWithNavBar(
       navigationShell: navigationShell,
     );
@@ -74,6 +82,30 @@ class CatalogRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const CatalogPage();
+  }
+}
+
+class DetailCatalogRoute extends GoRouteData {
+  const DetailCatalogRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const DetailCatalogPage();
+  }
+}
+
+@TypedGoRoute<ProductRoute>(
+  path: '/product',
+  name: ProductPage.routeName,
+)
+class ProductRoute extends GoRouteData {
+  const ProductRoute();
+
+  static final GlobalKey<NavigatorState> $navigatorKey = rootNavigatorKey;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ProductPage();
   }
 }
 
