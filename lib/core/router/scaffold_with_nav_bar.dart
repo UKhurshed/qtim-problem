@@ -51,18 +51,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
   }
 
   void _onTap(BuildContext context, int index) {
-    // // widget.navigationShell.
-    // log('index: $index');
-    // if (index == 2) {
-    //   context.go('/transfer');
-    //   // GoRouter.of(context).go('/transfer');
-    // } else {
     widget.navigationShell.goBranch(index);
-    // widget.navigationShell.goBranch(
-    //   index,
-    //   initialLocation: index == widget.navigationShell.currentIndex,
-    // );
-    // }
   }
 
   Widget _buildIcon(
@@ -72,7 +61,7 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
     return Icon(
       assetName,
       size: 24,
-      color: isActive ? Colors.deepPurple : Colors.grey.shade800,
+      color: isActive ? Theme.of(context).primaryColor : Colors.grey.shade800,
     );
   }
 }

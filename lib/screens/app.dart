@@ -13,9 +13,12 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Color(0xFFFAFAFA),
+        ),
         cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
           applyThemeToAll: true,
-          primaryColor: Colors.deepPurple,
+          primaryColor: Color(0xFFE1251B),
           primaryContrastingColor: Colors.black,
         ),
         pageTransitionsTheme: const PageTransitionsTheme(
@@ -34,13 +37,18 @@ class App extends StatelessWidget {
           ),
           scrolledUnderElevation: 0.0,
         ),
-        primaryColor: Colors.deepPurple,
+        primaryColor: const Color(0xFFE1251B),
         scaffoldBackgroundColor: Colors.white,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           elevation: 0,
           showUnselectedLabels: true,
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,
+          selectedItemColor: Color(0xFFE1251B),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style:
+              FilledButton.styleFrom(backgroundColor: const Color(0xFFE1251B)),
         ),
       ),
       routerConfig: router.config,

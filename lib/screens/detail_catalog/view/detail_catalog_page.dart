@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:qtim_problem/core/widgets/decorated_box_with_shadow.dart';
+import 'package:qtim_problem/core/widgets/widgets.dart';
+import 'package:qtim_problem/screens/product/view/product_page.dart';
 
 class DetailCatalogPage extends StatelessWidget {
   const DetailCatalogPage({super.key});
@@ -12,58 +13,104 @@ class DetailCatalogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        systemOverlayStyle: const SystemUiOverlayStyle(
+      appBar: const EmptyAppBar(
+        systemUiOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Color(0xFFE1251B),
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.light,
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 24),
-              SizedBox(
-                height: 40,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: index == 0
-                          ? const EdgeInsets.only(left: 16)
-                          : index == 4
-                              ? const EdgeInsets.only(right: 16)
-                              : EdgeInsets.zero,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(33),
-                            color: const Color(0xFFF4F4F4)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Center(
-                            child: Text(
-                              'Тонкое тесто',
-                              style: Theme.of(context).textTheme.bodySmall,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            automaticallyImplyLeading: false,
+            expandedHeight: 180,
+            pinned: true,
+            centerTitle: true,
+            toolbarHeight: 0,
+            backgroundColor: const Color(0xFFE1251B),
+            flexibleSpace: FlexibleSpaceBar(
+              background: DecoratedBox(
+                decoration: const BoxDecoration(
+                  color: Color(0xFFE1251B),
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 32,
+                        left: 16,
+                        child: SmallRoundedButton(
+                          onTap: () {},
+                        ),
+                      ),
+                      Positioned(
+                        top: 100,
+                        left: 16,
+                        child: Text(
+                          'Пицца',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(color: Colors.white),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: -20,
+                        right: 0,
+                        child: Image.asset('assets/part_pizza.png'),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                const SizedBox(height: 24),
+                SizedBox(
+                  height: 40,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: index == 0
+                            ? const EdgeInsets.only(left: 16)
+                            : index == 4
+                                ? const EdgeInsets.only(right: 16)
+                                : EdgeInsets.zero,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(33),
+                              color: const Color(0xFFF4F4F4)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Center(
+                              child: Text(
+                                'Тонкое тесто',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 5),
-                  itemCount: 5,
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 5),
+                    itemCount: 5,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              const ThinDoughView(),
-            ],
+                const SizedBox(height: 24),
+                const ThinDoughView(),
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
