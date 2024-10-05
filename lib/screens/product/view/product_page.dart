@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:qtim_problem/core/widgets/decorated_box_with_shadow.dart';
-import 'package:qtim_problem/core/widgets/leading_back_button.dart';
+import 'package:qtim_problem/core/widgets/widgets.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -41,13 +39,7 @@ class _ProductViewState extends State<_ProductView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
-      appBar: const EmptyAppBar(
-        systemUiOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Color(0xFFFAFAFA),
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.dark,
-        ),
-      ),
+      appBar: const EmptyAppBar(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -61,7 +53,7 @@ class _ProductViewState extends State<_ProductView> {
                 background: Stack(
                   children: [
                     Image.asset(
-                      'assets/header.png',
+                      'assets/header_pizza.png',
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.cover,
                     ),
@@ -128,8 +120,7 @@ class _ProductViewState extends State<_ProductView> {
                         fixedSize: const Size.fromHeight(44),
                         backgroundColor: const Color(0xFFE1251B),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)
-                        ),
+                            borderRadius: BorderRadius.circular(8)),
                       ),
                       child: Text(
                         'Добавить за 699\u20BD',
@@ -149,24 +140,4 @@ class _ProductViewState extends State<_ProductView> {
   }
 }
 
-class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const EmptyAppBar({
-    super.key,
-    required this.systemUiOverlayStyle,
-    this.backgroundColor = Colors.white,
-  });
 
-  final SystemUiOverlayStyle systemUiOverlayStyle;
-  final Color backgroundColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      systemOverlayStyle: systemUiOverlayStyle,
-      automaticallyImplyLeading: false,
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.zero;
-}

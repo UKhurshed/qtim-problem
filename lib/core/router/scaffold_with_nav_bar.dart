@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qtim_problem/core/utils/utils.dart';
 
 class ScaffoldWithNavBar extends StatefulWidget {
   const ScaffoldWithNavBar({
@@ -16,6 +17,7 @@ class ScaffoldWithNavBar extends StatefulWidget {
 class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     Widget scaffold = Scaffold(
       backgroundColor: const Color(0xFFEEF2F5),
       body: widget.navigationShell,
@@ -28,24 +30,22 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.list, isActive: false),
             activeIcon: _buildIcon(Icons.list, isActive: true),
-            label: 'Catalog',
+            label: s.catalog,
           ),
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.shopping_cart, isActive: false),
             activeIcon: _buildIcon(Icons.shopping_cart, isActive: true),
-            label: 'Basket',
+            label: s.basket,
           ),
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.person, isActive: false),
             activeIcon: _buildIcon(Icons.person, isActive: true),
-            label: 'Profile',
+            label: s.profile,
           ),
         ],
         currentIndex: widget.navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),
       ),
-
-      // bottomNavigationBar: CustomBottomNavigationBar(),
     );
     return scaffold;
   }

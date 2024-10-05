@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:qtim_problem/core/widgets/defailt_shimmer.dart';
+import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
 import 'package:qtim_problem/screens/catalog/model/catalog_model.dart';
 import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
 import 'package:qtim_problem/screens/detail_catalog/widgets/widgets.dart';
-import 'package:qtim_problem/screens/product/view/product_page.dart';
+import 'package:ui_kit/gen/assets.gen.dart';
 
 class DetailCatalogPage extends StatelessWidget {
   const DetailCatalogPage({
@@ -37,8 +37,7 @@ class _DetailCatalogView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA),
-      appBar: const EmptyAppBar(
+      appBar: const RedAppBar(
         systemUiOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Color(0xFFE1251B),
           statusBarBrightness: Brightness.light,
@@ -75,6 +74,7 @@ class _DetailCatalogSliverAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<CatalogModel> getCatalog = ref.watch(getCatalogProvider);
+    final s = S.of(context);
     return SliverAppBar(
       automaticallyImplyLeading: false,
       expandedHeight: 180,
@@ -112,7 +112,7 @@ class _DetailCatalogSliverAppBar extends ConsumerWidget {
                             ?.copyWith(color: Colors.white),
                       ),
                     AsyncError() => Text(
-                        'Пицца',
+                        s.pizza,
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall
@@ -129,7 +129,7 @@ class _DetailCatalogSliverAppBar extends ConsumerWidget {
                 Positioned(
                   bottom: -20,
                   right: 0,
-                  child: Image.asset('assets/part_pizza.png'),
+                  child: Assets.images.partPizza.image(),
                 )
               ],
             ),

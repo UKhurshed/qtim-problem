@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:qtim_problem/core/router/app_routes.dart';
+import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/decorated_box_with_shadow.dart';
 import 'package:qtim_problem/core/widgets/defailt_shimmer.dart';
 import 'package:qtim_problem/screens/catalog/model/catalog_model.dart';
 import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
+import 'package:ui_kit/gen/assets.gen.dart';
 
 class CatalogPage extends StatelessWidget {
   const CatalogPage({super.key});
@@ -24,11 +25,12 @@ class _CatalogView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final s = S.of(context);
     return Consumer(
       builder: (context, ref, child) {
         final AsyncValue<CatalogModel> getCatalog =
             ref.watch(getCatalogProvider);
-
+        final screenWidth = MediaQuery.of(context).size.width;
         return Scaffold(
           appBar: AppBar(
             centerTitle: false,
@@ -37,7 +39,7 @@ class _CatalogView extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Проспект Мира 183к2',
+                  s.selectedAddress,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -72,9 +74,8 @@ class _CatalogView extends ConsumerWidget {
                                   : EdgeInsets.zero,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              'assets/discount.jpg',
-                              width: 360,
+                            child: Assets.images.firstDiscount.image(
+                              width: screenWidth * 0.88,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -103,7 +104,8 @@ class _CatalogView extends ConsumerWidget {
                             return InkWell(
                               onTap: () {
                                 HapticFeedback.selectionClick();
-                                DetailCatalogRoute(catalogID: item.id - 1).push(context);
+                                DetailCatalogRoute(catalogID: item.id - 1)
+                                    .push(context);
                               },
                               child: DecoratedBoxWithShadow(
                                 backgroundColor: const Color(0xFFF4F4F4),
@@ -125,8 +127,7 @@ class _CatalogView extends ConsumerWidget {
                                       Positioned(
                                         bottom: -60,
                                         right: -50,
-                                        child: SvgPicture.asset(
-                                          'assets/food.svg',
+                                        child: Assets.images.food.svg(
                                           height: 180,
                                           width: 200,
                                         ),
@@ -142,7 +143,7 @@ class _CatalogView extends ConsumerWidget {
                       ),
                     AsyncError(:final error) => Center(
                         child: Text(
-                          'Error occurred: $error',
+                          s.errorOccurred(error.toString()),
                           textAlign: TextAlign.center,
                         ),
                       ),

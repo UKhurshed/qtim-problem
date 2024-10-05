@@ -1,0 +1,39 @@
+{
+  "selectedAddress": "Проспект Мира 183к2",
+  "errorOccurred": "Произошла ошибка: {error}",
+  "@errorOccurred": {
+    "description": "error description",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "format": "error happen"
+      }
+    }
+  },
+  "priceValueRUB": "{price}\u20BD",
+  "@priceValueRUB": {
+    "description": "price on RUB",
+    "placeholders": {
+      "price": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "basket": "Корзина",
+  "pizza": "Пицца",
+  "thinDough": "Тонкое тесто",
+  "enterEmail": "Введите email",
+  "incorrectEmail": "Некорректный email",
+  "userName": "Имя пользователя",
+  "email": "Email",
+  "phoneNumber": "Номер телефона",
+  "validEmail": "Email валиден",
+  "saveChanges": "Сохранить изменения",
+  "selectPhoto": "Выбрать фото",
+  "gallery": "Галерея",
+  "camera": "Камера",
+  "deleteAvatar": "Удалить аватарку",
+  "profile": "Профиль",
+  "catalog": "Каталог"
+}

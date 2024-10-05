@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:qtim_problem/core/widgets/defailt_shimmer.dart';
+import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
 import 'package:qtim_problem/screens/catalog/model/model.dart';
 import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
+import 'package:ui_kit/gen/assets.gen.dart';
 
 const _slierGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
   crossAxisCount: 2,
@@ -25,13 +25,14 @@ class ThinDoughList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<CatalogModel> getCatalog = ref.watch(getCatalogProvider);
 
+    final s = S.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Тонкое тесто',
+            s.thinDough,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 16),
@@ -78,7 +79,7 @@ class _MenuListView extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 36),
-                  child: Image.asset('assets/peperoni.png'),
+                  child: Assets.images.peperoni.image(),
                 ),
                 const SizedBox(height: 8),
                 Expanded(
@@ -102,7 +103,7 @@ class _MenuListView extends StatelessWidget {
                                 ?.copyWith(fontSize: 18),
                           ),
                           const SizedBox(height: 4),
-                          Spacer(),
+                          const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -150,8 +151,7 @@ class _MenuListView extends StatelessWidget {
                                   height: 42,
                                   width: 42,
                                   child: Center(
-                                    child:
-                                        SvgPicture.asset('assets/plus_24.svg'),
+                                    child: Assets.images.redPlus.svg(),
                                   ),
                                 ),
                               ),
@@ -178,6 +178,7 @@ class _MenuListSkeletonView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -193,7 +194,7 @@ class _MenuListSkeletonView extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 36),
-                  child: Image.asset('assets/peperoni.png'),
+                  child: Assets.images.peperoni.image(),
                 ),
                 const SizedBox(height: 8),
                 Expanded(
@@ -220,7 +221,7 @@ class _MenuListSkeletonView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           DefaultShimmer(
                             child: DecoratedBox(
                               decoration: BoxDecoration(
@@ -237,8 +238,7 @@ class _MenuListSkeletonView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                '500\u20BD',
+                              Text(s.priceValueRUB(500),
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium
@@ -255,8 +255,7 @@ class _MenuListSkeletonView extends StatelessWidget {
                                   height: 42,
                                   width: 42,
                                   child: Center(
-                                    child:
-                                        SvgPicture.asset('assets/plus_24.svg'),
+                                    child: Assets.images.redPlus.svg(),
                                   ),
                                 ),
                               ),
