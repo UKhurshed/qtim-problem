@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qtim_problem/screens/basket/view/basket_page.dart';
+import 'package:qtim_problem/screens/catalog/model/model.dart';
 import 'package:qtim_problem/screens/catalog/view/catalog_page.dart';
 import 'package:qtim_problem/screens/detail_catalog/view/detail_catalog_page.dart';
 import 'package:qtim_problem/screens/product/view/product_page.dart';
@@ -86,11 +87,17 @@ class CatalogRoute extends GoRouteData {
 }
 
 class DetailCatalogRoute extends GoRouteData {
-  const DetailCatalogRoute();
+  const DetailCatalogRoute({
+    required this.catalogID,
+  });
+
+  final int catalogID;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const DetailCatalogPage();
+    return DetailCatalogPage(
+      catalogID: catalogID,
+    );
   }
 }
 

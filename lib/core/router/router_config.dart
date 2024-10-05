@@ -6,7 +6,7 @@ import 'app_routes.dart';
 
 final config = GoRouter(
   navigatorKey: rootNavigatorKey,
-  initialLocation: '/catalog/detail-catalog',
+  initialLocation: '/catalog',
   debugLogDiagnostics: !kReleaseMode,
   routes: $appRoutes,
 );

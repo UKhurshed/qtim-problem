@@ -1,0 +1,209 @@
+{
+  "catalog": [
+    {
+      "id": 1,
+      "name": "Пицца",
+      "menu": [
+        {
+          "id": 1,
+          "name": "Цыпленок барбекю",
+          "price": 350,
+          "weight": "200 гр",
+          "extra_information": "Выгода 50!"
+        },
+        {
+          "id": 2,
+          "name": "Пепперони фреш",
+          "price": 280,
+          "weight": "300 гр",
+          "extra_information": null
+        },
+        {
+          "id": 3,
+          "name": "Двойной цыпленок",
+          "price": 450,
+          "weight": "150 гр",
+          "extra_information": "Выгода 70!"
+        },
+        {
+          "id": 4,
+          "name": "Чоризо фреш",
+          "price": 300,
+          "weight": "230 гр",
+          "extra_information": "Выгода 90₽!"
+        },
+        {
+          "id": 5,
+          "name": "Пепперони",
+          "price": 250,
+          "weight": "250 гр",
+          "extra_information": "Выгода 120₽!"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Бургеры",
+      "menu": [
+        {
+          "id": 1,
+          "name": "Куринный",
+          "price": 350,
+          "weight": "200 гр",
+          "extra_information": "Выгода 50!"
+        },
+        {
+          "id": 2,
+          "name": "Говяжий",
+          "price": 280,
+          "weight": "300 гр",
+          "extra_information": null
+        },
+        {
+          "id": 3,
+          "name": "Двойной цыпленок",
+          "price": 450,
+          "weight": "150 гр",
+          "extra_information": "Выгода 70!"
+        },
+        {
+          "id": 4,
+          "name": "Сырный",
+          "price": 300,
+          "weight": "230 гр",
+          "extra_information": "Выгода 90₽!"
+        },
+        {
+          "id": 5,
+          "name": "Острый мясной",
+          "price": 250,
+          "weight": "250 гр",
+          "extra_information": "Выгода 120₽!"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Тостеры",
+      "menu": [
+        {
+          "id": 1,
+          "name": "Куринный",
+          "price": 350,
+          "weight": "200 гр",
+          "extra_information": "Выгода 50!"
+        },
+        {
+          "id": 2,
+          "name": "Говяжий",
+          "price": 280,
+          "weight": "300 гр",
+          "extra_information": null
+        },
+        {
+          "id": 3,
+          "name": "Двойной цыпленок",
+          "price": 450,
+          "weight": "150 гр",
+          "extra_information": "Выгода 70!"
+        },
+        {
+          "id": 4,
+          "name": "Сырный",
+          "price": 300,
+          "weight": "230 гр",
+          "extra_information": "Выгода 90₽!"
+        },
+        {
+          "id": 5,
+          "name": "Острый мясной",
+          "price": 250,
+          "weight": "250 гр",
+          "extra_information": "Выгода 120₽!"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Напитки",
+      "menu": [
+        {
+          "id": 1,
+          "name": "Какао",
+          "price": 350,
+          "weight": "0.5л",
+          "extra_information": "Выгода 50!"
+        },
+        {
+          "id": 2,
+          "name": "Зеленый чай",
+          "price": 280,
+          "weight": "0.5л",
+          "extra_information": null
+        },
+        {
+          "id": 3,
+          "name": "Черный чай",
+          "price": 450,
+          "weight": "0.5л",
+          "extra_information": "Выгода 70!"
+        },
+        {
+          "id": 4,
+          "name": "Coca-cola",
+          "price": 300,
+          "weight": "1.5л",
+          "extra_information": "Выгода 90₽!"
+        },
+        {
+          "id": 5,
+          "name": "Мохито",
+          "price": 250,
+          "weight": "0.25л",
+          "extra_information": "Выгода 120₽!"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Закуски",
+      "menu": [
+        {
+          "id": 1,
+          "name": "Картофель из печи",
+          "price": 350,
+          "weight": "160 гр",
+          "extra_information": "Выгода 50!"
+        },
+        {
+          "id": 2,
+          "name": "Додстер",
+          "price": 280,
+          "weight": "120 гр",
+          "extra_information": null
+        },
+        {
+          "id": 3,
+          "name": "Стартер",
+          "price": 450,
+          "weight": "150 гр",
+          "extra_information": "Выгода 70!"
+        },
+        {
+          "id": 4,
+          "name": "Мясной стартер",
+          "price": 300,
+          "weight": "230 гр",
+          "extra_information": "Выгода 90₽!"
+        },
+        {
+          "id": 5,
+          "name": "Салат греческий",
+          "price": 350,
+          "weight": "350 гр",
+          "extra_information": "Выгода 120₽!"
+        }
+      ]
+    }
+  ]
+}

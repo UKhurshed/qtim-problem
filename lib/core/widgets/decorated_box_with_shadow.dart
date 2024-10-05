@@ -6,11 +6,13 @@ class DecoratedBoxWithShadow extends StatelessWidget {
     required this.backgroundColor,
     required this.borderRadius,
     required this.child,
+    this.isShadowAvailable = false,
   });
 
   final Color backgroundColor;
   final Widget child;
   final double borderRadius;
+  final bool isShadowAvailable;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +20,16 @@ class DecoratedBoxWithShadow extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         color: backgroundColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            spreadRadius: 0,
-            blurRadius: 30,
-            offset: const Offset(4, 4),
-          ),
-        ],
+        boxShadow: isShadowAvailable
+            ? [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  spreadRadius: 0,
+                  blurRadius: 30,
+                  offset: const Offset(4, 4),
+                ),
+              ]
+            : [],
       ),
       child: child,
     );

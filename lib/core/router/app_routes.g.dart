@@ -82,10 +82,15 @@ extension $CatalogRouteExtension on CatalogRoute {
 
 extension $DetailCatalogRouteExtension on DetailCatalogRoute {
   static DetailCatalogRoute _fromState(GoRouterState state) =>
-      const DetailCatalogRoute();
+      DetailCatalogRoute(
+        catalogID: int.parse(state.uri.queryParameters['catalog-i-d']!),
+      );
 
   String get location => GoRouteData.$location(
         '/catalog/detail-catalog',
+        queryParams: {
+          'catalog-i-d': catalogID.toString(),
+        },
       );
 
   void go(BuildContext context) => context.go(location);
