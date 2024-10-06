@@ -1,9 +1,11 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
 import 'package:qtim_problem/screens/catalog/model/model.dart';
 import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
+import 'package:repository/implementations/basket_item_insert/basket_item_insert.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
 const _slierGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
@@ -51,7 +53,7 @@ class ThinDoughList extends ConsumerWidget {
   }
 }
 
-class _MenuListView extends StatelessWidget {
+class _MenuListView extends ConsumerWidget {
   const _MenuListView({
     required this.element,
   });
@@ -59,7 +61,8 @@ class _MenuListView extends StatelessWidget {
   final CatalogElement element;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final insertBasketItemRef = ref.read(basketItemInsertProvider.f);
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -84,16 +87,16 @@ class _MenuListView extends StatelessWidget {
                 const SizedBox(height: 8),
                 Expanded(
                   child: DecoratedBox(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
+                    decoration: const BoxDecoration(color: Colors.white),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
                         vertical: 4,
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const SizedBox(height: 8),
                           Text(
                             item.name,
                             textAlign: TextAlign.start,
@@ -142,16 +145,31 @@ class _MenuListView extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                     ),
                               ),
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: const Color(0xFFF4F4F4),
-                                ),
-                                child: SizedBox(
-                                  height: 42,
-                                  width: 42,
-                                  child: Center(
-                                    child: Assets.images.redPlus.svg(),
+                              InkWell(
+                                onTap: () {
+                                  ref.watch(
+                                    basketItemInsertProvider(
+                                      BasketItemObject(
+                                        productId: item.id,
+                                        name: item.name,
+                                        price: item.price,
+                                        count: 1,
+                                        totalPrice: item.price,
+                                      ),
+                                    ).notifier,
+                                  );
+                                },
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: const Color(0xFFF4F4F4),
+                                  ),
+                                  child: SizedBox(
+                                    height: 42,
+                                    width: 42,
+                                    child: Center(
+                                      child: Assets.images.redPlus.svg(),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -238,7 +256,8 @@ class _MenuListSkeletonView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(s.priceValueRUB(500),
+                              Text(
+                                s.priceValueRUB(500),
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium

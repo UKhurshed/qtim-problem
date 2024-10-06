@@ -32,6 +32,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/minus.svg
   SvgGenImage get minus => const SvgGenImage('assets/images/minus.svg');
 
+  /// File path: assets/images/no_data.png
+  AssetGenImage get noData => const AssetGenImage('assets/images/no_data.png');
+
   /// File path: assets/images/part_pizza.png
   AssetGenImage get partPizza =>
       const AssetGenImage('assets/images/part_pizza.png');
@@ -57,6 +60,7 @@ class $AssetsImagesGen {
         food,
         headerPizza,
         minus,
+        noData,
         partPizza,
         peperoni,
         plus,

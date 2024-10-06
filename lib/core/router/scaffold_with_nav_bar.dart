@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
+import 'package:repository/repository.dart';
 
-class ScaffoldWithNavBar extends StatefulWidget {
+class ScaffoldWithNavBar extends ConsumerStatefulWidget {
   const ScaffoldWithNavBar({
     Key? key,
     required this.navigationShell,
@@ -11,12 +13,14 @@ class ScaffoldWithNavBar extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
 
   @override
-  State<ScaffoldWithNavBar> createState() => _ScaffoldWithNavBarState();
+  ConsumerState<ScaffoldWithNavBar> createState() => _ScaffoldWithNavBarState();
 }
 
-class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
+class _ScaffoldWithNavBarState extends ConsumerState<ScaffoldWithNavBar> {
   @override
   Widget build(BuildContext context) {
+    final listOfBasketItems =
+        ref.watch(basketItemListProvider).valueOrNull?.length ?? 0;
     final s = S.of(context);
     Widget scaffold = Scaffold(
       backgroundColor: const Color(0xFFEEF2F5),
@@ -33,8 +37,20 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
             label: s.catalog,
           ),
           BottomNavigationBarItem(
-            icon: _buildIcon(Icons.shopping_cart, isActive: false),
-            activeIcon: _buildIcon(Icons.shopping_cart, isActive: true),
+            icon: listOfBasketItems == 0
+                ? _buildIcon(Icons.person, isActive: false)
+                : _buildBasketIcon(
+                    Icons.shopping_cart,
+                    isActive: false,
+                    countOfBasketElements: listOfBasketItems,
+                  ),
+            activeIcon: listOfBasketItems == 0
+                ? _buildIcon(Icons.person, isActive: false)
+                : _buildBasketIcon(
+                    Icons.shopping_cart,
+                    isActive: true,
+                    countOfBasketElements: listOfBasketItems,
+                  ),
             label: s.basket,
           ),
           BottomNavigationBarItem(
@@ -60,8 +76,46 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar> {
   }) {
     return Icon(
       assetName,
-      size: 24,
+      size: 32,
       color: isActive ? Theme.of(context).primaryColor : Colors.grey.shade800,
+    );
+  }
+
+  Widget _buildBasketIcon(
+    IconData assetName, {
+    required bool isActive,
+    required int countOfBasketElements,
+  }) {
+    return Stack(
+      children: [
+        Icon(
+          assetName,
+          color:
+              isActive ? Theme.of(context).primaryColor : Colors.grey.shade800,
+          size: 32,
+        ),
+        Positioned(
+          top: 0,
+          right: 0,
+          child: DecoratedBox(
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: Colors.green),
+            child: SizedBox(
+              height: 18,
+              width: 18,
+              child: Center(
+                child: Text(
+                  '$countOfBasketElements',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

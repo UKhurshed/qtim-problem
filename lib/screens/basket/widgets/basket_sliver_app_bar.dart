@@ -1,15 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
+import 'package:repository/repository.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
-class BasketSliverAppBar extends StatelessWidget {
+class BasketSliverAppBar extends ConsumerWidget {
   const BasketSliverAppBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final s = S.of(context);
+    final basketListRef = ref.watch(basketItemListProvider).valueOrNull ?? [];
+    log('basketListRef: $basketListRef');
     return SliverAppBar(
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xFFFAFAFA),
@@ -21,13 +26,19 @@ class BasketSliverAppBar extends StatelessWidget {
               s.basket,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Positioned(
-              right: 16,
-              child: SmallRoundedButton(
-                onTap: () {},
-                child: Assets.images.clear.svg(),
-              ),
-            ),
+            basketListRef.isEmpty
+                ? const SizedBox()
+                : Positioned(
+                    right: 16,
+                    child: SmallRoundedButton(
+                      onTap: () {
+                        ref.watch(
+                          basketDeleteAllItemsProvider.notifier,
+                        );
+                      },
+                      child: Assets.images.clear.svg(),
+                    ),
+                  ),
             Positioned(
               bottom: 0,
               left: 0,
