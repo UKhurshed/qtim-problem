@@ -1,15 +1,22 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/screens/profile/widgets/widgets.dart';
+import 'package:repository/implementations/implementations.dart';
 
-class AvatarView extends StatelessWidget {
+class AvatarView extends ConsumerWidget {
   const AvatarView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final s = S.of(context);
+    final avatar = ref.watch(avatarsProvider);
+
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -28,39 +35,58 @@ class AvatarView extends StatelessWidget {
                   width: 3.5,
                 ),
               ),
-              child: const SizedBox(
+              child: SizedBox(
                 height: 110,
                 width: 110,
-                child: Center(
-                  child: Icon(
-                    Icons.person,
-                    size: 60,
-                  ),
-                ),
+                child: avatar == null
+                    ? const Center(
+                        child: Icon(
+                          Icons.person,
+                          size: 60,
+                        ),
+                      )
+                    : ClipOval(
+                      child: Image.memory(
+                          avatar.image,
+                          fit: BoxFit.cover,
+                        ),
+                    ),
               ),
             ),
           ),
           const SizedBox(height: 16),
           FilledButton(
             onPressed: () async {
-              ImagePick.selectImg(context, pick, false);
+              ImagePick.selectImg(
+                context,
+                pick,
+                false,
+                (croppedImage) async {
+                  final bytes = await croppedImage.readAsBytes();
+                  ref.read(avatarsProvider.notifier).addAvatar(bytes);
+                },
+              );
             },
             style: FilledButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child:  Text(s.selectPhoto),
+            child: Text(s.selectPhoto),
           )
         ],
       ),
     );
   }
 
-  void pick(BuildContext context, ImageSource imageSource) {
+  void pick(
+    BuildContext context,
+    ImageSource imageSource,
+    Function(CroppedFile imagePath) croppedImage,
+  ) {
     ImagePicker image = ImagePicker();
     image.pickImage(source: imageSource).then(
-          (pickImage) {
+      (pickImage) {
         if (pickImage != null) {
           ImageCropper imageCropper = ImageCropper();
           imageCropper
@@ -92,12 +118,10 @@ class AvatarView extends StatelessWidget {
             compressQuality: 50,
           )
               .then(
-                (cropImage) {
+            (cropImage) {
               if (cropImage != null) {
                 if (!context.mounted) return;
-                // setState(() {
-                //   file = cropperImage.path;
-                // });
+                croppedImage(cropImage);
               }
             },
           );

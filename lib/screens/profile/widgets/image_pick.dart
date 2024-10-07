@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 
@@ -9,8 +11,10 @@ class ImagePick {
     Function(
       BuildContext context,
       ImageSource imageSource,
+      Function(CroppedFile croppedImage),
     ) savingImage,
     bool isEmptyAvatar,
+    Function(CroppedFile croppedImage) croppedImage,
   ) {
     final s = S.of(context);
     showModalBottomSheet(
@@ -51,7 +55,11 @@ class ImagePick {
                       children: [
                         InkWell(
                           onTap: () {
-                            savingImage(context, ImageSource.gallery);
+                            savingImage(
+                              context,
+                              ImageSource.gallery,
+                              croppedImage,
+                            );
                             modalContext.pop();
                           },
                           child: Column(
@@ -72,7 +80,11 @@ class ImagePick {
                         ),
                         InkWell(
                           onTap: () {
-                            savingImage(context, ImageSource.camera);
+                            savingImage(
+                              context,
+                              ImageSource.camera,
+                              croppedImage,
+                            );
                             modalContext.pop();
                           },
                           child: Column(

@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
 import 'package:qtim_problem/screens/profile/widgets/widgets.dart';
+import 'package:repository/implementations/implementations.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -16,16 +18,18 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-class _ProfileView extends StatefulWidget {
+class _ProfileView extends ConsumerStatefulWidget {
   const _ProfileView();
 
   @override
-  State<_ProfileView> createState() => _ProfileViewState();
+  ConsumerState<_ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<_ProfileView> {
+class _ProfileViewState extends ConsumerState<_ProfileView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+  final _userNameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   final RegExp emailRegExp = RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -44,6 +48,11 @@ class _ProfileViewState extends State<_ProfileView> {
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
+    final userRef = ref.watch(userProvider);
+    log('userRef: $userRef');
+    _userNameController.text = userRef?.name ?? "";
+    _emailController.text = userRef?.email ?? "";
+    _phoneNumberController.text = userRef?.phone ?? "";
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: const EmptyAppBar(),
@@ -63,6 +72,7 @@ class _ProfileViewState extends State<_ProfileView> {
                   children: [
                     // Другие поля для редактирования профиля
                     TextField(
+                      controller: _userNameController,
                       decoration: InputDecoration(
                         labelText: s.userName,
                         border: const OutlineInputBorder(),
@@ -80,6 +90,7 @@ class _ProfileViewState extends State<_ProfileView> {
                     ),
                     const SizedBox(height: 20.0),
                     IntlPhoneField(
+                      controller: _phoneNumberController,
                       decoration: InputDecoration(
                         labelText: s.phoneNumber,
                         border: const OutlineInputBorder(
@@ -96,12 +107,28 @@ class _ProfileViewState extends State<_ProfileView> {
                     FilledButton(
                       onPressed: () {
                         // Логика сохранения данных профиля
-                        if (_formKey.currentState?.validate() ?? false) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(s.validEmail),
-                            ),
-                          );
+                        if ((_formKey.currentState?.validate() ?? false) &&
+                            userRef != null) {
+                          final userName = userRef.name;
+                          final email = userRef.email;
+                          final phone = userRef.phone;
+
+                          if (userName != _userNameController.text) {
+                            ref.read(userProvider.notifier).updateUser(userRef
+                                .copyWith(name: _userNameController.text));
+                          }
+
+                          if (email != _emailController.text) {
+                            ref.read(userProvider.notifier).updateUser(
+                                userRef.copyWith(email: _emailController.text));
+                          }
+
+                          if (phone != _phoneNumberController.text) {
+                            ref.read(userProvider.notifier).updateUser(userRef
+                                .copyWith(phone: _phoneNumberController.text));
+                          }
+
+                          FocusManager.instance.primaryFocus?.unfocus();
                         }
                       },
                       style: FilledButton.styleFrom(

@@ -6,7 +6,7 @@ part of 'get_menu_by_id.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getMenuByIdHash() => r'b75dd004541e942a085ed1b76eeb11b99aba33f8';
+String _$getMenuByIdHash() => r'1f517c26a35484cd4decb99361d089df8fd033f1';
 
 /// Copied from Dart SDK
 class _SystemHash {

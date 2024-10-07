@@ -1,7 +1,5 @@
-
-
 import 'dart:io';
-import 'package:database/src/daos/daos.dart';
+import 'package:database/src/daos/dao.dart';
 import 'package:database/src/tables/tables.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
@@ -16,7 +14,7 @@ final databaseProvider = Provider<AppDatabase>(
       (ref) => AppDatabase(),
 );
 
-@DriftDatabase(tables: [BasketItems], daos: [BasketItemsDao])
+@DriftDatabase(tables: [BasketItems, Users, Avatars], daos: [BasketItemsDao, UserDao])
 class AppDatabase extends _$AppDatabase {
   // we tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());

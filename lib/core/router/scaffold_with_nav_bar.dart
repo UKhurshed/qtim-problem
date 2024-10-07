@@ -38,14 +38,14 @@ class _ScaffoldWithNavBarState extends ConsumerState<ScaffoldWithNavBar> {
           ),
           BottomNavigationBarItem(
             icon: listOfBasketItems == 0
-                ? _buildIcon(Icons.person, isActive: false)
+                ? _buildIcon(Icons.shopping_cart, isActive: false)
                 : _buildBasketIcon(
                     Icons.shopping_cart,
                     isActive: false,
                     countOfBasketElements: listOfBasketItems,
                   ),
             activeIcon: listOfBasketItems == 0
-                ? _buildIcon(Icons.person, isActive: false)
+                ? _buildIcon(Icons.shopping_cart, isActive: false)
                 : _buildBasketIcon(
                     Icons.shopping_cart,
                     isActive: true,
