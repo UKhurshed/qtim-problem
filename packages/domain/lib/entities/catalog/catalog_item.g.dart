@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'catalog_model.dart';
+part of 'catalog_item.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CatalogModelImpl _$$CatalogModelImplFromJson(Map<String, dynamic> json) =>
-    _$CatalogModelImpl(
+_$CatalogItemImpl _$$CatalogItemImplFromJson(Map<String, dynamic> json) =>
+    _$CatalogItemImpl(
       catalog: (json['catalog'] as List<dynamic>)
           .map((e) => CatalogElement.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$CatalogModelImplToJson(_$CatalogModelImpl instance) =>
+Map<String, dynamic> _$$CatalogItemImplToJson(_$CatalogItemImpl instance) =>
     <String, dynamic>{
       'catalog': instance.catalog,
     };

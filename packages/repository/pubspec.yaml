@@ -17,6 +17,8 @@ dependencies:
     path: ../database
   domain:
     path: ../domain
+  ui_kit:
+    path: ../ui_kit
 
 dev_dependencies:
   flutter_test:

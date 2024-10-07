@@ -1,9 +1,10 @@
-import 'package:domain/domain.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
-import 'package:qtim_problem/screens/basket/widgets/basket_sliver_app_bar.dart';
+import 'package:qtim_problem/screens/basket/widgets/widgets.dart';
 import 'package:repository/repository.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
@@ -24,6 +25,14 @@ class _BasketView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final basketList = ref.watch(basketItemListProvider);
+
+    final isBasketEmpty = basketList.value?.isEmpty ?? true;
+
+    final totalPrice =
+        isBasketEmpty ? 0.0 : basketList.value?.first.totalPrice ?? 0.0;
+
+    final isBasketListEmpty = isBasketEmpty && totalPrice == 0.0;
+
     final s = S.of(context);
     return Scaffold(
       appBar: const EmptyAppBar(),
@@ -36,9 +45,11 @@ class _BasketView extends ConsumerWidget {
                   ? SliverToBoxAdapter(
                       child: Center(child: Assets.images.noData.image()),
                     )
-                  : BasketItemList(basketItems: value),
-              AsyncError(:final error) => Text(
-                  s.errorOccurred(error.toString()),
+                  : BasketProductList(basketItems: value),
+              AsyncError(:final error) => SliverToBoxAdapter(
+                  child: Text(
+                    s.errorOccurred(error.toString()),
+                  ),
                 ),
               _ => SliverList(
                   delegate: SliverChildBuilderDelegate(
@@ -62,168 +73,9 @@ class _BasketView extends ConsumerWidget {
                   ),
                 ),
             },
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BasketItemList extends ConsumerWidget {
-  const BasketItemList({
-    super.key,
-    required this.basketItems,
-  });
-
-  final List<BasketItemObject> basketItems;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final s = S.of(context);
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final item = basketItems[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8.0,
-              horizontal: 16,
-            ),
-            child: SizedBox(
-              height: 92,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Assets.images.headerPizza.image(
-                          height: 84,
-                          width: 118,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    item.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                ),
-                                const SizedBox(width: 20),
-                                IconButton(
-                                  onPressed: () {
-                                    ref.watch(
-                                      basketDeleteItemProvider(item.productId)
-                                          .notifier,
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    Icons.close,
-                                    size: 28,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            // const SizedBox(height: 8),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CounterPizza(
-                                  minusBtnPressed: () {
-                                    ref.watch(
-                                      basketDecrementItemProvider(
-                                              item.productId)
-                                          .notifier,
-                                    );
-                                  },
-                                  plusBtnPressed: () {
-                                    ref.watch(
-                                      basketIncrementItemProvider(
-                                              item.productId)
-                                          .notifier,
-                                    );
-                                  },
-                                  count: item.count.toString(),
-                                ),
-                                Text(
-                                  s.priceValueRUB(359),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-        childCount: basketItems.length,
-      ),
-    );
-  }
-}
-
-class CounterPizza extends StatelessWidget {
-  const CounterPizza({
-    super.key,
-    required this.plusBtnPressed,
-    required this.minusBtnPressed,
-    required this.count,
-  });
-
-  final VoidCallback plusBtnPressed;
-  final VoidCallback minusBtnPressed;
-  final String count;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: const Color(0xFFF4F4F4),
-      ),
-      child: SizedBox(
-        height: 44,
-        width: 95,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            InkWell(
-              onTap: minusBtnPressed,
-              child: Assets.images.minus.svg(),
-            ),
-            Text(
-              count,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            InkWell(
-              onTap: plusBtnPressed,
-              child: Assets.images.plus.svg(),
-            )
+            isBasketListEmpty
+                ? const SliverToBoxAdapter()
+                : BasketFooterTotalPrice(totalPrice: totalPrice),
           ],
         ),
       ),

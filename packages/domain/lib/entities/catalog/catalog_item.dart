@@ -1,17 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'catalog_model.freezed.dart';
+part 'catalog_item.freezed.dart';
 
-part 'catalog_model.g.dart';
+part 'catalog_item.g.dart';
 
 @freezed
-class CatalogModel with _$CatalogModel {
-  factory CatalogModel({
+class CatalogItem with _$CatalogItem {
+  factory CatalogItem({
     required List<CatalogElement> catalog,
-  }) = _CatalogModel;
+  }) = _CatalogItem;
 
-  factory CatalogModel.fromJson(Map<String, dynamic> json) =>
-      _$CatalogModelFromJson(json);
+  factory CatalogItem.fromJson(Map<String, dynamic> json) =>
+      _$CatalogItemFromJson(json);
 }
 
 @freezed

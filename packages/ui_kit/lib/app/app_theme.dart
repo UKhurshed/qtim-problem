@@ -40,7 +40,13 @@ class AppTheme {
         selectedItemColor: Color(0xFFE1251B),
       ),
       filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(backgroundColor: const Color(0xFFE1251B)),
+        style: FilledButton.styleFrom(
+          backgroundColor: const Color(0xFFE1251B),
+          fixedSize: const Size.fromHeight(44),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
       ),
     );
   }

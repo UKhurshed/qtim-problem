@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qtim_problem/screens/basket/view/basket_page.dart';
-import 'package:qtim_problem/screens/catalog/model/model.dart';
 import 'package:qtim_problem/screens/catalog/view/catalog_page.dart';
 import 'package:qtim_problem/screens/detail_catalog/view/detail_catalog_page.dart';
 import 'package:qtim_problem/screens/product/view/product_page.dart';
@@ -106,13 +105,22 @@ class DetailCatalogRoute extends GoRouteData {
   name: ProductPage.routeName,
 )
 class ProductRoute extends GoRouteData {
-  const ProductRoute();
+  const ProductRoute({
+    required this.productId,
+    required this.menuId,
+  });
+
+  final int productId;
+  final int menuId;
 
   static final GlobalKey<NavigatorState> $navigatorKey = rootNavigatorKey;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ProductPage();
+    return ProductPage(
+      productId: productId,
+      menuId: menuId,
+    );
   }
 }
 

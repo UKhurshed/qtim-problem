@@ -35,5 +35,22 @@
   "camera": "Камера",
   "deleteAvatar": "Удалить аватарку",
   "profile": "Профиль",
-  "catalog": "Каталог"
+  "catalog": "Каталог",
+  "orderTotalPrice": "Сумма заказа",
+  "purchaseOrder": "Оформить заказ",
+  "small": "Маленькая",
+  "medium": "Средняя",
+  "large": "Большая",
+  "traditionalDough": "Традиционное тесто",
+  "productDescription": "Римское тесто, Курица, Помидоры черри, Сыр сливочный, Сыр Моцарелла, Соус песто, Салат руккола, Чеснок",
+  "addToBasketFor": "Добавить за {price}\u20BD",
+  "@addToBasketFor": {
+    "description": "price on RUB",
+    "placeholders": {
+      "price": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }

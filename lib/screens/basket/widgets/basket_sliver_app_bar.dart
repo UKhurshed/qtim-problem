@@ -39,19 +39,11 @@ class BasketSliverAppBar extends ConsumerWidget {
                       child: Assets.images.clear.svg(),
                     ),
                   ),
-            Positioned(
+            const Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: Color(0xFFF4F4F4),
-                ),
-                child: SizedBox(
-                  height: 1,
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ),
+              child: SeparateLine(),
             ),
           ],
         ),

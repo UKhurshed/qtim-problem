@@ -1,11 +1,10 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:qtim_problem/core/router/app_routes.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
-import 'package:qtim_problem/screens/catalog/model/model.dart';
-import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
-import 'package:repository/implementations/basket_item_insert/basket_item_insert.dart';
+import 'package:repository/repository.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
 const _slierGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
@@ -25,7 +24,7 @@ class ThinDoughList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<CatalogModel> getCatalog = ref.watch(getCatalogProvider);
+    final getCatalog = ref.watch(getCatalogByIdProvider(catalogID));
 
     final s = S.of(context);
     return Padding(
@@ -40,7 +39,8 @@ class ThinDoughList extends ConsumerWidget {
           const SizedBox(height: 16),
           switch (getCatalog) {
             AsyncData(:final value) => _MenuListView(
-                element: value.catalog[catalogID],
+                element: value,
+                productId: catalogID,
               ),
             AsyncError(:final error) => Center(
                 child: Text('$error'),
@@ -53,16 +53,17 @@ class ThinDoughList extends ConsumerWidget {
   }
 }
 
-class _MenuListView extends ConsumerWidget {
+class _MenuListView extends StatelessWidget {
   const _MenuListView({
     required this.element,
+    required this.productId,
   });
 
   final CatalogElement element;
+  final int productId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final insertBasketItemRef = ref.read(basketItemInsertProvider.f);
+  Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -147,17 +148,8 @@ class _MenuListView extends ConsumerWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  ref.watch(
-                                    basketItemInsertProvider(
-                                      BasketItemObject(
-                                        productId: item.id,
-                                        name: item.name,
-                                        price: item.price,
-                                        count: 1,
-                                        totalPrice: item.price,
-                                      ),
-                                    ).notifier,
-                                  );
+                                  ProductRoute(productId: productId, menuId: item.id)
+                                      .push(context);
                                 },
                                 child: DecoratedBox(
                                   decoration: BoxDecoration(

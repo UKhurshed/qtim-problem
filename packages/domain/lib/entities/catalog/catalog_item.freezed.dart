@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'catalog_model.dart';
+part of 'catalog_item.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,44 +14,44 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-CatalogModel _$CatalogModelFromJson(Map<String, dynamic> json) {
-  return _CatalogModel.fromJson(json);
+CatalogItem _$CatalogItemFromJson(Map<String, dynamic> json) {
+  return _CatalogItem.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CatalogModel {
+mixin _$CatalogItem {
   List<CatalogElement> get catalog => throw _privateConstructorUsedError;
 
-  /// Serializes this CatalogModel to a JSON map.
+  /// Serializes this CatalogItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of CatalogModel
+  /// Create a copy of CatalogItem
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CatalogModelCopyWith<CatalogModel> get copyWith =>
+  $CatalogItemCopyWith<CatalogItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CatalogModelCopyWith<$Res> {
-  factory $CatalogModelCopyWith(
-          CatalogModel value, $Res Function(CatalogModel) then) =
-      _$CatalogModelCopyWithImpl<$Res, CatalogModel>;
+abstract class $CatalogItemCopyWith<$Res> {
+  factory $CatalogItemCopyWith(
+          CatalogItem value, $Res Function(CatalogItem) then) =
+      _$CatalogItemCopyWithImpl<$Res, CatalogItem>;
   @useResult
   $Res call({List<CatalogElement> catalog});
 }
 
 /// @nodoc
-class _$CatalogModelCopyWithImpl<$Res, $Val extends CatalogModel>
-    implements $CatalogModelCopyWith<$Res> {
-  _$CatalogModelCopyWithImpl(this._value, this._then);
+class _$CatalogItemCopyWithImpl<$Res, $Val extends CatalogItem>
+    implements $CatalogItemCopyWith<$Res> {
+  _$CatalogItemCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CatalogModel
+  /// Create a copy of CatalogItem
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -68,32 +68,32 @@ class _$CatalogModelCopyWithImpl<$Res, $Val extends CatalogModel>
 }
 
 /// @nodoc
-abstract class _$$CatalogModelImplCopyWith<$Res>
-    implements $CatalogModelCopyWith<$Res> {
-  factory _$$CatalogModelImplCopyWith(
-          _$CatalogModelImpl value, $Res Function(_$CatalogModelImpl) then) =
-      __$$CatalogModelImplCopyWithImpl<$Res>;
+abstract class _$$CatalogItemImplCopyWith<$Res>
+    implements $CatalogItemCopyWith<$Res> {
+  factory _$$CatalogItemImplCopyWith(
+          _$CatalogItemImpl value, $Res Function(_$CatalogItemImpl) then) =
+      __$$CatalogItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<CatalogElement> catalog});
 }
 
 /// @nodoc
-class __$$CatalogModelImplCopyWithImpl<$Res>
-    extends _$CatalogModelCopyWithImpl<$Res, _$CatalogModelImpl>
-    implements _$$CatalogModelImplCopyWith<$Res> {
-  __$$CatalogModelImplCopyWithImpl(
-      _$CatalogModelImpl _value, $Res Function(_$CatalogModelImpl) _then)
+class __$$CatalogItemImplCopyWithImpl<$Res>
+    extends _$CatalogItemCopyWithImpl<$Res, _$CatalogItemImpl>
+    implements _$$CatalogItemImplCopyWith<$Res> {
+  __$$CatalogItemImplCopyWithImpl(
+      _$CatalogItemImpl _value, $Res Function(_$CatalogItemImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CatalogModel
+  /// Create a copy of CatalogItem
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? catalog = null,
   }) {
-    return _then(_$CatalogModelImpl(
+    return _then(_$CatalogItemImpl(
       catalog: null == catalog
           ? _value._catalog
           : catalog // ignore: cast_nullable_to_non_nullable
@@ -104,12 +104,12 @@ class __$$CatalogModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CatalogModelImpl implements _CatalogModel {
-  _$CatalogModelImpl({required final List<CatalogElement> catalog})
+class _$CatalogItemImpl implements _CatalogItem {
+  _$CatalogItemImpl({required final List<CatalogElement> catalog})
       : _catalog = catalog;
 
-  factory _$CatalogModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CatalogModelImplFromJson(json);
+  factory _$CatalogItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CatalogItemImplFromJson(json);
 
   final List<CatalogElement> _catalog;
   @override
@@ -121,14 +121,14 @@ class _$CatalogModelImpl implements _CatalogModel {
 
   @override
   String toString() {
-    return 'CatalogModel(catalog: $catalog)';
+    return 'CatalogItem(catalog: $catalog)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CatalogModelImpl &&
+            other is _$CatalogItemImpl &&
             const DeepCollectionEquality().equals(other._catalog, _catalog));
   }
 
@@ -137,37 +137,37 @@ class _$CatalogModelImpl implements _CatalogModel {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_catalog));
 
-  /// Create a copy of CatalogModel
+  /// Create a copy of CatalogItem
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CatalogModelImplCopyWith<_$CatalogModelImpl> get copyWith =>
-      __$$CatalogModelImplCopyWithImpl<_$CatalogModelImpl>(this, _$identity);
+  _$$CatalogItemImplCopyWith<_$CatalogItemImpl> get copyWith =>
+      __$$CatalogItemImplCopyWithImpl<_$CatalogItemImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CatalogModelImplToJson(
+    return _$$CatalogItemImplToJson(
       this,
     );
   }
 }
 
-abstract class _CatalogModel implements CatalogModel {
-  factory _CatalogModel({required final List<CatalogElement> catalog}) =
-      _$CatalogModelImpl;
+abstract class _CatalogItem implements CatalogItem {
+  factory _CatalogItem({required final List<CatalogElement> catalog}) =
+      _$CatalogItemImpl;
 
-  factory _CatalogModel.fromJson(Map<String, dynamic> json) =
-      _$CatalogModelImpl.fromJson;
+  factory _CatalogItem.fromJson(Map<String, dynamic> json) =
+      _$CatalogItemImpl.fromJson;
 
   @override
   List<CatalogElement> get catalog;
 
-  /// Create a copy of CatalogModel
+  /// Create a copy of CatalogItem
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CatalogModelImplCopyWith<_$CatalogModelImpl> get copyWith =>
+  _$$CatalogItemImplCopyWith<_$CatalogItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

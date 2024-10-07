@@ -4,9 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
-import 'package:qtim_problem/screens/catalog/model/catalog_model.dart';
-import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
 import 'package:qtim_problem/screens/detail_catalog/widgets/widgets.dart';
+import 'package:repository/implementations/catalog/catalog.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
 class DetailCatalogPage extends StatelessWidget {
@@ -73,7 +72,7 @@ class _DetailCatalogSliverAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<CatalogModel> getCatalog = ref.watch(getCatalogProvider);
+    final getCatalog = ref.watch(getCatalogByIdProvider(catalogID));
     final s = S.of(context);
     return SliverAppBar(
       automaticallyImplyLeading: false,
@@ -105,7 +104,7 @@ class _DetailCatalogSliverAppBar extends ConsumerWidget {
                   left: 16,
                   child: switch (getCatalog) {
                     AsyncData(:final value) => Text(
-                        value.catalog[catalogID].name,
+                        value.name,
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall

@@ -6,7 +6,7 @@ part of 'basket_delete_item.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$basketDeleteItemHash() => r'5b4d2f2e260634c9426d1906bc5afa640b15bc3d';
+String _$basketDeleteItemHash() => r'8d92808e11ea05dbb99dde9bd5b2793d97761438';
 
 /// Copied from Dart SDK
 class _SystemHash {

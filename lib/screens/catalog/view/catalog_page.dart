@@ -5,8 +5,7 @@ import 'package:qtim_problem/core/router/app_routes.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/decorated_box_with_shadow.dart';
 import 'package:qtim_problem/core/widgets/defailt_shimmer.dart';
-import 'package:qtim_problem/screens/catalog/model/catalog_model.dart';
-import 'package:qtim_problem/screens/catalog/provider/catalog_provider.dart';
+import 'package:repository/implementations/catalog/catalog.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
 class CatalogPage extends StatelessWidget {
@@ -28,8 +27,8 @@ class _CatalogView extends ConsumerWidget {
     final s = S.of(context);
     return Consumer(
       builder: (context, ref, child) {
-        final AsyncValue<CatalogModel> getCatalog =
-            ref.watch(getCatalogProvider);
+        final getCatalog =
+            ref.watch(getCatalogItemsProvider);
         final screenWidth = MediaQuery.of(context).size.width;
         return Scaffold(
           appBar: AppBar(
@@ -104,7 +103,8 @@ class _CatalogView extends ConsumerWidget {
                             return InkWell(
                               onTap: () {
                                 HapticFeedback.selectionClick();
-                                DetailCatalogRoute(catalogID: item.id - 1)
+
+                                DetailCatalogRoute(catalogID: index + 1)
                                     .push(context);
                               },
                               child: DecoratedBoxWithShadow(

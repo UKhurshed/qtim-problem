@@ -144,10 +144,17 @@ RouteBase get $productRoute => GoRouteData.$route(
     );
 
 extension $ProductRouteExtension on ProductRoute {
-  static ProductRoute _fromState(GoRouterState state) => const ProductRoute();
+  static ProductRoute _fromState(GoRouterState state) => ProductRoute(
+        productId: int.parse(state.uri.queryParameters['product-id']!),
+        menuId: int.parse(state.uri.queryParameters['menu-id']!),
+      );
 
   String get location => GoRouteData.$location(
         '/product',
+        queryParams: {
+          'product-id': productId.toString(),
+          'menu-id': menuId.toString(),
+        },
       );
 
   void go(BuildContext context) => context.go(location);
