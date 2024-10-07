@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 
 part 'app_database.g.dart';
 
+//провайдим инстанс класса AppDatabase
 final databaseProvider = Provider<AppDatabase>(
       (ref) => AppDatabase(),
 );

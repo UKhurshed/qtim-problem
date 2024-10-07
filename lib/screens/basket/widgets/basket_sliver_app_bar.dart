@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
@@ -7,6 +5,7 @@ import 'package:qtim_problem/core/widgets/widgets.dart';
 import 'package:repository/repository.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
+//AppBar Корзины
 class BasketSliverAppBar extends ConsumerWidget {
   const BasketSliverAppBar({super.key});
 
@@ -14,7 +13,6 @@ class BasketSliverAppBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = S.of(context);
     final basketListRef = ref.watch(basketItemListProvider).valueOrNull ?? [];
-    log('basketListRef: $basketListRef');
     return SliverAppBar(
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xFFFAFAFA),

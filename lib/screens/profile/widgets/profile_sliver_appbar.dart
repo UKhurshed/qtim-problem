@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/screens/profile/widgets/widgets.dart';
 
+//AppBar профиля
 class ProfileSliverAppbar extends StatelessWidget {
   const ProfileSliverAppbar({super.key});
 

@@ -8,6 +8,7 @@ import 'package:qtim_problem/screens/detail_catalog/widgets/widgets.dart';
 import 'package:repository/implementations/catalog/catalog.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
+//Экран детального каталога, напр. Пицца, Бургер и т.д.
 class DetailCatalogPage extends StatelessWidget {
   const DetailCatalogPage({
     super.key,
@@ -52,7 +53,7 @@ class _DetailCatalogView extends StatelessWidget {
                 const SizedBox(height: 24),
                 const ThinDoughHorizontalScrollview(),
                 const SizedBox(height: 24),
-                ThinDoughList(catalogID: catalogID),
+                CatalogList(catalogID: catalogID),
                 const SizedBox(height: 24),
               ],
             ),
@@ -63,6 +64,7 @@ class _DetailCatalogView extends StatelessWidget {
   }
 }
 
+//SliverAppBar экрана детального каталога
 class _DetailCatalogSliverAppBar extends ConsumerWidget {
   const _DetailCatalogSliverAppBar({
     required this.catalogID,

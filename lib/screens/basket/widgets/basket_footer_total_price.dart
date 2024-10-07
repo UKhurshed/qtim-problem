@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/core/widgets/widgets.dart';
 
+//Виджет для показа сумму корзины и прикреплен внизу экрана
 class BasketFooterTotalPrice extends StatelessWidget {
   const BasketFooterTotalPrice({super.key, required this.totalPrice});
 

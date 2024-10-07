@@ -7,6 +7,7 @@ import 'package:qtim_problem/core/widgets/widgets.dart';
 import 'package:qtim_problem/screens/profile/widgets/widgets.dart';
 import 'package:repository/implementations/implementations.dart';
 
+//Экран профиль
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
@@ -35,6 +36,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
   );
 
+  //Валидирует email
   String? _validateEmail(String? value) {
     final s = S.of(context);
     if (value == null || value.isEmpty) {
@@ -49,7 +51,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
   Widget build(BuildContext context) {
     final s = S.of(context);
     final userRef = ref.watch(userProvider);
-    log('userRef: $userRef');
+
     _userNameController.text = userRef?.name ?? "";
     _emailController.text = userRef?.email ?? "";
     _phoneNumberController.text = userRef?.phone ?? "";
@@ -58,6 +60,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
       appBar: const EmptyAppBar(),
       body: CustomScrollView(
         slivers: [
+          //Aватарка
           const ProfileSliverAppbar(),
           SliverToBoxAdapter(
             child: Padding(
@@ -70,7 +73,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Другие поля для редактирования профиля
+                    //Имя пользователя
                     TextField(
                       controller: _userNameController,
                       decoration: InputDecoration(
@@ -79,6 +82,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    //Почта пользователя
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -89,6 +93,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
                       ),
                     ),
                     const SizedBox(height: 20.0),
+                    //Номер телефон пользователя, можно выбрать
                     IntlPhoneField(
                       controller: _phoneNumberController,
                       decoration: InputDecoration(

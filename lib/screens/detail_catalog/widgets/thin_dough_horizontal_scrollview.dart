@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 
+//Горизонтальный список выбора типов продукта, список статичный не было
+//реализовано до конца
 class ThinDoughHorizontalScrollview extends StatelessWidget {
   const ThinDoughHorizontalScrollview({super.key});
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+//Настраиваем и получаем ThemeData
 class AppTheme {
   static ThemeData getThemeData() {
     return ThemeData(

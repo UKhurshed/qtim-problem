@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
@@ -8,6 +6,7 @@ import 'package:qtim_problem/screens/basket/widgets/widgets.dart';
 import 'package:repository/repository.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
+//Экран Корзина
 class BasketPage extends StatelessWidget {
   const BasketPage({super.key});
 
@@ -51,27 +50,7 @@ class _BasketView extends ConsumerWidget {
                     s.errorOccurred(error.toString()),
                   ),
                 ),
-              _ => SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 16,
-                        ),
-                        child: DefaultShimmer(
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(color: Colors.grey),
-                            child: SizedBox(
-                              height: 92,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    childCount: 6,
-                  ),
-                ),
+              _ => const BasketSliverListSkeletonView()
             },
             isBasketListEmpty
                 ? const SliverToBoxAdapter()
@@ -82,3 +61,6 @@ class _BasketView extends ConsumerWidget {
     );
   }
 }
+
+
+

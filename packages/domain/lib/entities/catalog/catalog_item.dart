@@ -4,6 +4,7 @@ part 'catalog_item.freezed.dart';
 
 part 'catalog_item.g.dart';
 
+//Маппим на этот класс, списка каталога, которые развертываем из ассетов
 @freezed
 class CatalogItem with _$CatalogItem {
   factory CatalogItem({

@@ -14,8 +14,9 @@ const _slierGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
   childAspectRatio: 0.8,
 );
 
-class ThinDoughList extends ConsumerWidget {
-  const ThinDoughList({
+//Отображает список меню продуктов
+class CatalogList extends ConsumerWidget {
+  const CatalogList({
     super.key,
     required this.catalogID,
   });

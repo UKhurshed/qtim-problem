@@ -5,6 +5,7 @@ import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:repository/repository.dart';
 import 'package:ui_kit/gen/assets.gen.dart';
 
+//Виджет для показа списка продуктов корзины
 class BasketProductList extends ConsumerWidget {
   const BasketProductList({
     super.key,
@@ -107,6 +108,7 @@ class BasketProductList extends ConsumerWidget {
   }
 }
 
+//Виджет нужен для управление количество продукта корзины
 class _CounterProduct extends ConsumerWidget {
   const _CounterProduct({
     required this.count,

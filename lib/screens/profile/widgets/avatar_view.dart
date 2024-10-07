@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -9,6 +6,8 @@ import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:qtim_problem/screens/profile/widgets/widgets.dart';
 import 'package:repository/implementations/implementations.dart';
 
+
+//Виджет Аватарки и её взаимодействия
 class AvatarView extends ConsumerWidget {
   const AvatarView({super.key});
 
@@ -55,8 +54,10 @@ class AvatarView extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 16),
+          //Выбираем фото с камеры или галереи, сохраняем в базу данных
           FilledButton(
             onPressed: () async {
+              //Класс обертка для работы с выбором картинки и кропа картинки
               ImagePick.selectImg(
                 context,
                 pick,

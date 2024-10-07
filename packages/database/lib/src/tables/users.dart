@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 
+//Таблица для хранения информации пользователя
 @DataClassName('User')
 class Users extends Table {
   IntColumn get id => integer().autoIncrement()();

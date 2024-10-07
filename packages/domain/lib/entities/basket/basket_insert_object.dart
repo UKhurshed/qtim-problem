@@ -1,5 +1,6 @@
 import 'package:database/database.dart';
 
+//Маппим на этот класс, продуктов для корзины которые получаем из базы данных
 class BasketItemObject {
   final int productId;
   final String name;

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
 import 'package:repository/repository.dart';
 
+//Scaffold класс для обертки bottomNavigationBar
 class ScaffoldWithNavBar extends ConsumerStatefulWidget {
   const ScaffoldWithNavBar({
     Key? key,
@@ -81,6 +82,8 @@ class _ScaffoldWithNavBarState extends ConsumerState<ScaffoldWithNavBar> {
     );
   }
 
+  //Отдельный виджет для показа корзины когда продукт добавляется
+  // и обновляется количество корзины
   Widget _buildBasketIcon(
     IconData assetName, {
     required bool isActive,
