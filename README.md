@@ -16,3 +16,9 @@
   Riverpod для State Managment  
   Build_Runner и еще несколько связанных пакетов используется для Кодогенерация  
   
+# Video Demo
+
+
+
+https://github.com/user-attachments/assets/f9791a48-6fc7-4757-a46f-185a98e40d52
+
