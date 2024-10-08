@@ -22,6 +22,7 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return _ProductView(
       productId: productId,
+      menuId: menuId,
     );
   }
 }
@@ -29,9 +30,11 @@ class ProductPage extends StatelessWidget {
 class _ProductView extends StatelessWidget {
   const _ProductView({
     required this.productId,
+    required this.menuId,
   });
 
   final int productId;
+  final int menuId;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,10 @@ class _ProductView extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             const ProductSliverAppBar(),
-            ProductMainSectionView(productId: productId),
+            ProductMainSectionView(
+              productId: productId,
+              menuId: menuId,
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qtim_problem/core/utils/utils.dart';
@@ -28,7 +29,7 @@ class _BasketView extends ConsumerWidget {
     final isBasketEmpty = basketList.value?.isEmpty ?? true;
 
     final totalPrice =
-        isBasketEmpty ? 0.0 : basketList.value?.first.totalPrice ?? 0.0;
+        isBasketEmpty ? 0.0 : _getTotalPrice(basketList.value ?? []);
 
     final isBasketListEmpty = isBasketEmpty && totalPrice == 0.0;
 
@@ -60,7 +61,12 @@ class _BasketView extends ConsumerWidget {
       ),
     );
   }
+
+  double _getTotalPrice(List<BasketItemObject> items) {
+    double totalPrice = 0.0;
+    for (final item in items) {
+      totalPrice += item.count * item.price;
+    }
+    return totalPrice;
+  }
 }
-
-
-

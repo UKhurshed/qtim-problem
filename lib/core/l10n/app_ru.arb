@@ -52,5 +52,6 @@
         "format": "decimalPattern"
       }
     }
-  }
+  },
+  "invalidPhoneNumber": "Неверный номер мобильного телефона"
 }

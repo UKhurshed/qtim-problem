@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,11 @@ class ProductMainSectionView extends ConsumerStatefulWidget {
   const ProductMainSectionView({
     super.key,
     required this.productId,
+    required this.menuId,
   });
 
   final int productId;
+  final int menuId;
 
   @override
   ConsumerState<ProductMainSectionView> createState() =>
@@ -37,7 +41,9 @@ class _ProductMainSectionViewState
   @override
   Widget build(BuildContext context) {
     final s = S.of(context);
-    final menu = ref.watch(getMenuByIdProvider(widget.productId)).value;
+    final menu =
+        ref.watch(getMenuByIdProvider(widget.menuId, widget.productId)).value;
+    log('menu: ${menu?.price}, name: ${menu?.name}, menuId: ${widget.menuId}, product: ${widget.productId}');
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -89,7 +95,7 @@ class _ProductMainSectionViewState
                   ref.watch(
                     basketItemInsertProvider(
                       BasketItemObject(
-                        productId: widget.productId,
+                        productId: widget.menuId,
                         name: menu.name,
                         price: menu.price,
                         count: 1,
@@ -106,7 +112,7 @@ class _ProductMainSectionViewState
                     borderRadius: BorderRadius.circular(8)),
               ),
               child: Text(
-                s.addToBasketFor(699),
+                s.addToBasketFor(menu?.price.toInt() ?? 0),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Colors.white,
                     ),

@@ -96,6 +96,7 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
                     //Номер телефон пользователя, можно выбрать
                     IntlPhoneField(
                       controller: _phoneNumberController,
+                      invalidNumberMessage: s.invalidPhoneNumber,
                       decoration: InputDecoration(
                         labelText: s.phoneNumber,
                         border: const OutlineInputBorder(
@@ -112,28 +113,16 @@ class _ProfileViewState extends ConsumerState<_ProfileView> {
                     FilledButton(
                       onPressed: () {
                         // Логика сохранения данных профиля
+                        FocusManager.instance.primaryFocus?.unfocus();
                         if ((_formKey.currentState?.validate() ?? false) &&
                             userRef != null) {
-                          final userName = userRef.name;
-                          final email = userRef.email;
-                          final phone = userRef.phone;
-
-                          if (userName != _userNameController.text) {
-                            ref.read(userProvider.notifier).updateUser(userRef
-                                .copyWith(name: _userNameController.text));
-                          }
-
-                          if (email != _emailController.text) {
-                            ref.read(userProvider.notifier).updateUser(
-                                userRef.copyWith(email: _emailController.text));
-                          }
-
-                          if (phone != _phoneNumberController.text) {
-                            ref.read(userProvider.notifier).updateUser(userRef
-                                .copyWith(phone: _phoneNumberController.text));
-                          }
-
-                          FocusManager.instance.primaryFocus?.unfocus();
+                          ref.read(userProvider.notifier).updateUser(
+                                userRef.copyWith(
+                                  name: _userNameController.text,
+                                  email: _emailController.text,
+                                  phone: _phoneNumberController.text,
+                                ),
+                              );
                         }
                       },
                       style: FilledButton.styleFrom(

@@ -6,7 +6,7 @@ part of 'get_menu_by_id.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getMenuByIdHash() => r'1f517c26a35484cd4decb99361d089df8fd033f1';
+String _$getMenuByIdHash() => r'74b76bc1fff3c4ff2bce2b676aeccf37575f89c3';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,12 @@ class _SystemHash {
 }
 
 abstract class _$GetMenuById extends BuildlessAutoDisposeAsyncNotifier<Menu> {
-  late final int id;
+  late final int menuId;
+  late final int catalogId;
 
   FutureOr<Menu> build(
-    int id,
+    int menuId,
+    int catalogId,
   );
 }
 
@@ -48,10 +50,12 @@ class GetMenuByIdFamily extends Family<AsyncValue<Menu>> {
 
   /// See also [GetMenuById].
   GetMenuByIdProvider call(
-    int id,
+    int menuId,
+    int catalogId,
   ) {
     return GetMenuByIdProvider(
-      id,
+      menuId,
+      catalogId,
     );
   }
 
@@ -60,7 +64,8 @@ class GetMenuByIdFamily extends Family<AsyncValue<Menu>> {
     covariant GetMenuByIdProvider provider,
   ) {
     return call(
-      provider.id,
+      provider.menuId,
+      provider.catalogId,
     );
   }
 
@@ -84,9 +89,12 @@ class GetMenuByIdProvider
     extends AutoDisposeAsyncNotifierProviderImpl<GetMenuById, Menu> {
   /// See also [GetMenuById].
   GetMenuByIdProvider(
-    int id,
+    int menuId,
+    int catalogId,
   ) : this._internal(
-          () => GetMenuById()..id = id,
+          () => GetMenuById()
+            ..menuId = menuId
+            ..catalogId = catalogId,
           from: getMenuByIdProvider,
           name: r'getMenuByIdProvider',
           debugGetCreateSourceHash:
@@ -96,7 +104,8 @@ class GetMenuByIdProvider
           dependencies: GetMenuByIdFamily._dependencies,
           allTransitiveDependencies:
               GetMenuByIdFamily._allTransitiveDependencies,
-          id: id,
+          menuId: menuId,
+          catalogId: catalogId,
         );
 
   GetMenuByIdProvider._internal(
@@ -106,17 +115,20 @@ class GetMenuByIdProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
+    required this.menuId,
+    required this.catalogId,
   }) : super.internal();
 
-  final int id;
+  final int menuId;
+  final int catalogId;
 
   @override
   FutureOr<Menu> runNotifierBuild(
     covariant GetMenuById notifier,
   ) {
     return notifier.build(
-      id,
+      menuId,
+      catalogId,
     );
   }
 
@@ -125,13 +137,16 @@ class GetMenuByIdProvider
     return ProviderOverride(
       origin: this,
       override: GetMenuByIdProvider._internal(
-        () => create()..id = id,
+        () => create()
+          ..menuId = menuId
+          ..catalogId = catalogId,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
+        menuId: menuId,
+        catalogId: catalogId,
       ),
     );
   }
@@ -143,21 +158,27 @@ class GetMenuByIdProvider
 
   @override
   bool operator ==(Object other) {
-    return other is GetMenuByIdProvider && other.id == id;
+    return other is GetMenuByIdProvider &&
+        other.menuId == menuId &&
+        other.catalogId == catalogId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, menuId.hashCode);
+    hash = _SystemHash.combine(hash, catalogId.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin GetMenuByIdRef on AutoDisposeAsyncNotifierProviderRef<Menu> {
-  /// The parameter `id` of this provider.
-  int get id;
+  /// The parameter `menuId` of this provider.
+  int get menuId;
+
+  /// The parameter `catalogId` of this provider.
+  int get catalogId;
 }
 
 class _GetMenuByIdProviderElement
@@ -166,7 +187,9 @@ class _GetMenuByIdProviderElement
   _GetMenuByIdProviderElement(super.provider);
 
   @override
-  int get id => (origin as GetMenuByIdProvider).id;
+  int get menuId => (origin as GetMenuByIdProvider).menuId;
+  @override
+  int get catalogId => (origin as GetMenuByIdProvider).catalogId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

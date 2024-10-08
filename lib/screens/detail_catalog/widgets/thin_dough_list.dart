@@ -149,8 +149,10 @@ class _MenuListView extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  ProductRoute(productId: productId, menuId: item.id)
-                                      .push(context);
+                                  ProductRoute(
+                                    productId: productId,
+                                    menuId: item.id,
+                                  ).push(context);
                                 },
                                 child: DecoratedBox(
                                   decoration: BoxDecoration(
